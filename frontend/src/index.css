@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'DM Serif Display', Georgia, Cambria, 'Times New Roman', serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
+    font-family: var(--font-sans);
+    background-color: #FAFAFC;
+    color: #111827;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom Institutional & Document Elements */
+.bg-warm-ivory {
+  background-color: #FAFAFC;
+}
+
+.bg-soft-warm {
+  background-color: #E8F0FC;
+}
+
+.text-charcoal {
+  color: #111827;
+}
+
+.text-deep-ink {
+  color: #071B3A;
+}
+
+.text-muted-gray {
+  color: #667085;
+}
+
+.border-warm {
+  border-color: #D9DEE7;
+}
+
+/* Subtle Document Paper Texture / Ruler Grid */
+.doc-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(217, 222, 231, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 222, 231, 0.45) 1px, transparent 1px);
+}
+
+.doc-dotted-pattern {
+  background-image: radial-gradient(#D9DEE7 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Document registration marks */
+.doc-crosshair {
+  position: relative;
+}
+.doc-crosshair::before,
+.doc-crosshair::after {
+  content: '';
+  position: absolute;
+  background-color: #667085;
+}
+
+/* Subtle scan pulse */
+@keyframes scan-vertical {
+  0% {
+    top: 0%;
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.15;
+  }
+}
+
+.animate-scan-line {
+  animation: scan-vertical 4.5s ease-in-out infinite;
+}
+
+/* Print Specific Media Styles for Institutional Reports */
+@media print {
+  @page {
+    size: auto;
+    margin: 12mm 15mm;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  #root, .min-h-screen, main, .flex-1 {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide app navigation, sidebar, top header, actions, modals, buttons */
+  header, nav, aside, footer:not(.report-print-footer), .no-print, button, input, select, textarea {
+    display: none !important;
+  }
+
+  .report-print-container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background-color: #FFFFFF !important;
+  }
+
+  tr, .finding-card, .page-break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
